@@ -1,0 +1,39 @@
+
+<definitions
+        xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:tns="http://soap1.byhovsky.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://soap1.byhovsky.com/"
+        name="HelloWebServiceImplService">
+    <types/>
+    <message name="getHelloString">
+        <part name="arg0" type="xsd:string"/>
+    </message>
+    <message name="getHelloStringResponse">
+        <part name="return" type="xsd:string"/>
+    </message>
+    <portType name="HelloWebService">
+        <operation name="getHelloString">
+            <input wsam:Action="http://soap1.byhovsky.com/HelloWebService/getHelloStringRequest"
+                   message="tns:getHelloString"/>
+            <output wsam:Action="http://soap1.byhovsky.com/HelloWebService/getHelloStringResponse"
+                    message="tns:getHelloStringResponse"/>
+        </operation>
+    </portType>
+    <binding name="HelloWebServiceImplPortBinding" type="tns:HelloWebService">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"/>
+        <operation name="getHelloString">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal" namespace="http://soap1.byhovsky.com/"/>
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://soap1.byhovsky.com/"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="HelloWebServiceImplService">
+        <port name="HelloWebServiceImplPort" binding="tns:HelloWebServiceImplPortBinding">
+            <soap:address location="http://localhost:1986/wss/hello"/>
+        </port>
+    </service>
+</definitions>
